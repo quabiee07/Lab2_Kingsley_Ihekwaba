@@ -51,12 +51,11 @@ public class BankAccount {
 
     public void deposit(double amount) throws NegativeAmountException,
             ZeroAmountException {
-        if (amount== -1){
-            throw  new NegativeAmountException("Amount must be a positive number!");
-        } else if (amount == 0){
+        if (amount == -1) {
+            throw new NegativeAmountException("Amount must be a positive number!");
+        } else if (amount == 0) {
             throw new ZeroAmountException("Amount can't be zero!");
         }
-
         setAccountBalance(accountBalance + amount);
         System.out.printf("$%.2f was deposited into your account%n%n", amount);
 
@@ -64,25 +63,32 @@ public class BankAccount {
 
     public void withdraw(double amount) throws NegativeAmountException,
             ZeroAmountException, InsufficientFundsException {
-        if (amount < 0) {
-            throw new NegativeAmountException("Amount must be a positive number!");
-        }
-        if (amount == 0) {
-            throw new ZeroAmountException("Amount can't be zero!");
-        }
-        if (amount > accountBalance) {
-            throw new InsufficientFundsException("Insufficient funds!");
+
+        try {
+            if (amount < 0) {
+                throw new NegativeAmountException("Amount must be a positive number!");
+            }
+            if (amount == 0) {
+                throw new ZeroAmountException("Amount can't be zero!");
+            }
+            if (amount > accountBalance) {
+                throw new InsufficientFundsException("Insufficient funds!");
+            }
+
+            setAccountBalance(accountBalance - amount);
+            System.out.printf("$%.2f was withdrawn from your account%n%n", amount);
+        } finally {
+            System.out.println("Withdrawal operation executed!");
+
         }
 
-        setAccountBalance(accountBalance - amount);
-        System.out.printf("$%.2f was withdrawn from your account%n%n", amount);
     }
 
     private String validateName(String name) throws EmptyFieldException {
-        if (name == null || name.isBlank()) {
+        if (name == null || name.trim().isEmpty()) {
             throw new EmptyFieldException("Account Name must not be empty");
         }
-        return name;
+        return name.trim();
     }
 
     private String validateAccountNumber(String number) throws InvalidAccountNumber {
@@ -95,7 +101,7 @@ public class BankAccount {
     }
 
     private double validateBalance(double balance) throws NegativeAmountException {
-        if (balance == -1) {
+        if (balance < 0) {
             throw new NegativeAmountException("Balance cannot be a negative number");
         }
         return balance;
