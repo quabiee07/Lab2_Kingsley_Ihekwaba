@@ -57,7 +57,7 @@ public class BankAccount {
             throw new ZeroAmountException("Amount can't be zero!");
         }
 
-        setAccountNumber(accountName + amount);
+        setAccountBalance(accountBalance + amount);
         System.out.printf("$%.2f was deposited into your account%n%n", amount);
 
     }

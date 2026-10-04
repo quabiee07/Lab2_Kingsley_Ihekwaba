@@ -7,7 +7,7 @@ public class BankDriver {
     static void main(String[] args) throws Exception {
         Scanner input = new Scanner(System.in);
 
-        BankAccount[] bankAccounts = new BankAccount[1];
+        BankAccount[] bankAccounts = new BankAccount[3];
         BankAccount selected;
 
 
