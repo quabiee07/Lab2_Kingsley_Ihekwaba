@@ -5,8 +5,8 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class BankAccount {
-    private String accountName;
-    private String accountNumber;
+    private final String accountName;
+    private final String accountNumber;
     private double accountBalance;
     NumberFormat cadFmt = NumberFormat.getCurrencyInstance(Locale.CANADA);
 
@@ -21,16 +21,8 @@ public class BankAccount {
         return accountName;
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
-    }
-
     public String getAccountNumber() {
         return accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
     }
 
     public String getAccountBalance() {
